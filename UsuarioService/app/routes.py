@@ -18,11 +18,21 @@ async def registrar_usuario(usuario: UsuarioCreate, db: AsyncSession = Depends(g
 
 @router.post("/login")
 async def login(data: LoginData, db: AsyncSession = Depends(get_db)):
-    db_usuario = await usuario_dao.get_usuario_por_correo(db, correo=data.correo)
-    if not db_usuario or not usuario_dao.verify_password(data.contraseña, db_usuario.contraseña):
-        raise HTTPException(status_code=401, detail="Credenciales incorrectas")
-    token = create_access_token(subject=db_usuario.correo)
+    usuario = await usuario_dao.get_usuario_por_correo(db, data.correo)
+    if not usuario:
+        raise HTTPException(status_code=400, detail="Correo o contraseña incorrectos")
+    if not usuario_dao.verify_password(data.contraseña, usuario["contraseña"]):
+        raise HTTPException(status_code=400, detail="Correo o contraseña incorrectos")
+
+    
+    token = create_access_token(
+        id_usuario=usuario["id_usuario"],
+        nombre=usuario["nombre"],
+        email=usuario["correo"],
+        role=usuario["rol"]
+    )
     return {"access_token": token, "token_type": "bearer"}
+
 
 
 @router.get("/protegida", dependencies=[Depends(JWTBearer())])

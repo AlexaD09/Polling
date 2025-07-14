@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Empleado</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="bg-light">
+
+  <nav class="navbar navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">Dashboard Empleado</span>
+      <button id="btnLogout" onclick="window.location.href='/index.html'" class="btn btn-outline-light" >Cerrar sesión</button>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Formulario de registro de queja -->
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white">
+        Registrar queja de cliente presencial
+      </div>
+      <div class="card-body">
+        <form id="formQueja">
+          <div class="row mb-3">
+            <div class="col">
+              <label for="nombre" class="form-label">Nombre del Cliente</label>
+              <input type="text" class="form-control" id="nombre" required />
+            </div>
+            <div class="col">
+              <label for="correo" class="form-label">Correo del Cliente</label>
+              <input type="email" class="form-control" id="correo" />
+            </div>
+          </div>
+          <div class="mb-3">
+        <label for="tituloQueja" class="form-label">Título de la queja</label>
+        <input type="text" class="form-control" id="tituloQueja" placeholder="Título breve" required />
+      </div>
+          <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción de la queja</label>
+            <textarea class="form-control" id="descripcion" rows="3" required></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-success">Registrar Queja</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tabla de quejas -->
+    <div class="card">
+      <div class="card-header bg-secondary text-white">
+        Quejas Registradas
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered table-hover" id="tablaQuejas">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Cliente</th>
+              <th>Correo</th>
+              <th>Descripción</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Las filas se llenarán con JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Aquí pondrás luego el script para manejar el envío y listado -->
+</body>
+</html>

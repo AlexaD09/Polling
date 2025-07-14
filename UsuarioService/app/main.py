@@ -5,10 +5,15 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(title="Usuario Service")
 
 # CORS
+origins = [
+    "http://localhost:8080",
+    "http://localhost:8081",
+    # Puedes agregar más orígenes si tienes otros frontends o ambientes
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080"],  # Tu frontend local
+    allow_origins=origins,  # Tu frontend local
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
