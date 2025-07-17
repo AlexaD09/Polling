@@ -28,3 +28,11 @@ class QuejaDAO:
             doc["_id"] = str(doc["_id"])  # Convertimos el ObjectId a string
             quejas.append(doc)
         return quejas
+
+    async def listar_todas(self):
+        cursor = self.collection.find()
+        quejas = []
+        async for doc in cursor:
+            doc["_id"] = str(doc["_id"])  # Convertimos el ObjectId a string para el frontend
+            quejas.append(doc)
+        return quejas

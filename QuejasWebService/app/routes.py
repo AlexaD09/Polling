@@ -1,6 +1,7 @@
-from fastapi import APIRouter, Body, Depends
+from typing import List
+from fastapi import APIRouter, Body, Depends, Path, Query
 from QuejasWebService.app.dao.queja_dao_mongo import QuejaDAO
-from QuejasWebService.app.schemas import QuejaCreate
+from QuejasWebService.app.schemas import  QuejaCreate
 from QuejasWebService.app.database import db
 from fastapi import HTTPException
 
@@ -21,3 +22,18 @@ async def obtener_quejas_usuario(usuario_id: str, dao: QuejaDAO = Depends(get_qu
     if not quejas:
         raise HTTPException(status_code=404, detail="No se encontraron quejas para este usuario")
     return quejas
+
+@router.get("/quejas-web/")
+async def obtener_todas_quejas(dao: QuejaDAO = Depends(get_queja_dao)):
+    return await dao.listar_todas() 
+
+@router.put("/quejas-web/{id_queja}/estado")
+async def actualizar_estado_queja_web(
+    id_queja: str = Path(...),
+    nuevo_estado: str = Query(...),
+    dao: QuejaDAO = Depends(get_queja_dao)
+):
+    actualizado = await dao.actualizar_estado(id_queja, nuevo_estado)
+    if actualizado == 0:
+        raise HTTPException(status_code=404, detail="Queja no encontrada o no actualizada")
+    return {"mensaje": "Estado actualizado correctamente"}
