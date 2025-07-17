@@ -1,24 +1,40 @@
+from sqlalchemy import text
 from sqlalchemy.orm import Session
-from ..models import QuejaOficina
-from ..schemas import Queja, QuejaCreate
+from ..schemas import QuejaCreate
 
 def crear_queja(db: Session, queja: QuejaCreate):
-    db_queja = QuejaOficina(**queja.dict())
-    db.add(db_queja)
+    query = text("""
+        SELECT * FROM sp_crear_queja(
+            :id_usuario, :nombre_cliente, :correo_cliente, :titulo, :descripcion, :estado
+        )
+    """)
+    result = db.execute(query, {
+        "id_usuario": queja.id_usuario,
+        "nombre_cliente": queja.nombre_cliente,
+        "correo_cliente": queja.correo_cliente,
+        "titulo": queja.titulo,
+        "descripcion": queja.descripcion,
+        "estado": queja.estado
+    })
+    row = result.first()
     db.commit()
-    db.refresh(db_queja)
-    return db_queja
+    return row
 
 def obtener_quejas(db: Session):
-    return db.query(QuejaOficina).all()
+    query = text("SELECT * FROM sp_obtener_quejas()")
+    result = db.execute(query)
+    return result.fetchall()
 
 def obtener_queja_por_id(db: Session, id_queja: int):
-    return db.query(QuejaOficina).filter(QuejaOficina.id_queja == id_queja).first()
+    query = text("SELECT * FROM sp_obtener_queja_por_id(:id_queja)")
+    result = db.execute(query, {"id_queja": id_queja})
+    return result.first()
 
 def actualizar_estado_queja(db: Session, id_queja: int, nuevo_estado: str):
-    db_queja = db.query(QuejaOficina).filter(QuejaOficina.id_queja == id_queja).first()
-    if db_queja:
-        db_queja.estado = nuevo_estado
-        db.commit()
-        db.refresh(db_queja)
-    return db_queja
+    query = text("SELECT * FROM sp_actualizar_estado_queja(:id_queja, :nuevo_estado)")
+    result = db.execute(query, {
+        "id_queja": id_queja,
+        "nuevo_estado": nuevo_estado
+    })
+    db.commit()
+    return result.first()
