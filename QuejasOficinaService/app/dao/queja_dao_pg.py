@@ -1,6 +1,6 @@
 from sqlalchemy import text
 from sqlalchemy.orm import Session
-from ..schemas import QuejaCreate
+from ..dto_queja_oficina import QuejaCreate
 
 def crear_queja(db: Session, queja: QuejaCreate):
     query = text("""

@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import APIRouter, Body, Depends, Path, Query
 from QuejasWebService.app.dao.queja_dao_mongo import QuejaDAO
-from QuejasWebService.app.schemas import  QuejaCreate
+from QuejasWebService.app.dto_queja_web import  QuejaCreate
 from QuejasWebService.app.database import db
 from fastapi import HTTPException
 

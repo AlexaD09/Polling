@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from UsuarioService.app.dao import usuario_dao
-from UsuarioService.app.schemas import UsuarioCreate, Usuario, LoginData
+from UsuarioService.app.dto_usuario import UsuarioCreate, Usuario, LoginData
 from UsuarioService.app.database import get_db
 from UsuarioService.app.auth.auth_bearer import JWTBearer
 from UsuarioService.app.auth.auth_handler import create_access_token

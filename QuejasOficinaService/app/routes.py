@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from QuejasOficinaService.app.schemas import Queja, QuejaCreate
+from QuejasOficinaService.app.dto_queja_oficina import Queja, QuejaCreate
 from QuejasOficinaService.app.dao.queja_dao_pg import crear_queja, obtener_quejas, obtener_queja_por_id, actualizar_estado_queja
 from QuejasOficinaService.app.database import SessionLocal
 

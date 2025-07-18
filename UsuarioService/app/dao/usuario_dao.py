@@ -3,6 +3,7 @@ from sqlalchemy import text
 from UsuarioService.app.auth.auth_handler import get_password_hash
 from passlib.context import CryptContext
 
+
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def verify_password(plain_password, hashed_password):
@@ -13,11 +14,10 @@ async def get_usuario_por_correo(db: AsyncSession, correo: str):
     result = await db.execute(query, {"correo": correo})
     row = result.first()
     if row:
-        return {
+        return  {
             "id_usuario": row.id_usuario,
             "nombre": row.nombre,
             "correo": row.correo,
-            "contraseña": row.contraseña,
             "rol": row.rol
         }
     return None
