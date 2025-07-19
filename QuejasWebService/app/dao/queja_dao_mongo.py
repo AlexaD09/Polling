@@ -1,4 +1,4 @@
-from bson import ObjectId
+from bson.objectid import ObjectId
 
 class QuejaDAO:
     def __init__(self, db):
@@ -9,12 +9,10 @@ class QuejaDAO:
         return str(resultado.inserted_id)
 
     async def obtener_queja_por_id(self, id_queja):
-        from bson.objectid import ObjectId
         queja = await self.collection.find_one({"_id": ObjectId(id_queja)})
         return queja
 
     async def actualizar_estado(self, id_queja, nuevo_estado):
-        from bson.objectid import ObjectId
         resultado = await self.collection.update_one(
             {"_id": ObjectId(id_queja)},
             {"$set": {"estado": nuevo_estado}}

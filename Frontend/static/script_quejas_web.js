@@ -79,7 +79,7 @@ async function cargarQuejas() {
   const id_usuario = decoded.sub;
 
   try {
-    const response = await fetch(`http://localhost:8001/quejas/usuario/${id_usuario}`, {
+    const response = await fetch(`http://localhost:8003/api/reporte/web/usuario/${id_usuario}`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }

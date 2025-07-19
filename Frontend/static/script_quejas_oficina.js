@@ -79,7 +79,7 @@ async function cargarQuejasOficina() {
   if (!token) return;
   const decoded = parseJwt(token);
     try{
-     const res = await fetch("http://localhost:8002/oficina/quejas-oficina/",{
+     const res = await fetch("http://localhost:8003/api/reporte/oficina",{
        headers: {
          "Authorization": `Bearer ${token}`
      }
@@ -134,9 +134,10 @@ document.getElementById("formQueja").addEventListener("submit", function (e) {
 
 
 async function cambiarEstadoOficina(id_queja, nuevoEstado) {
+   console.log("ID queja a cambiar:", id_queja);
   const token = localStorage.getItem("access_token");
   if (!token) return;
-
+ 
   try {
     const res = await fetch(`http://localhost:8002/oficina/quejas-oficina/${id_queja}/estado?nuevo_estado=${nuevoEstado}`, {
       method: "PUT",
@@ -161,7 +162,7 @@ async function cargarQuejasWeb() {
   if (!token) return;
 
   try {
-    const res = await fetch("http://localhost:8001/quejas-web/", {
+    const res = await fetch("http://localhost:8003/api/reporte/web", {
       headers: {
         "Authorization": `Bearer ${token}`
       }
@@ -176,14 +177,14 @@ async function cargarQuejasWeb() {
     quejas.forEach(q => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${q._id}</td>
+        <td>${q.id}</td>
         <td>${q.nombre}</td>
         <td>${q.email}</td>
         <td>${q.titulo}</td>
         <td>${q.descripcion}</td>
         <td>${q.estado}</td>
         <td>
-          <select onchange="cambiarEstadoWeb('${q._id}', this.value)" class="form-select form-select-sm">
+          <select onchange="cambiarEstadoWeb('${q.id}', this.value)" class="form-select form-select-sm">
             <option value="Pendiente" ${q.estado === "Pendiente" ? "selected" : ""}>Pendiente</option>
             <option value="En Proceso" ${q.estado === "En Proceso" ? "selected" : ""}>En Proceso</option>
             <option value="Resuelto" ${q.estado === "Resuelto" ? "selected" : ""}>Resuelto</option>

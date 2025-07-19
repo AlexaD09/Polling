@@ -1,13 +1,56 @@
+/* Fondo general */
 body {
-  font-family: Arial, sans-serif;
-  margin: 40px;
+  margin: 0;
+  height: 100vh;
+  background: url('https://images.unsplash.com/photo-1515263487997-1a5c0e09f0ce?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #0056b3;
+  backdrop-filter: brightness(0.8);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-input {
-  display: block;
-  margin-bottom: 10px;
-  padding: 8px;
-  width: 300px;
+
+/* Contenedor del formulario */
+.login-container {
+  background: rgba(182, 244, 244, 0.95);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
-button {
-  padding: 8px 12px;
+
+.login-container:hover {
+  transform: translateY(-5px);
+}
+
+/* Títulos */
+.card-title {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Botones */
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Enlaces */
+.btn-link {
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+/* Mensaje de error */
+#mensaje {
+  font-size: 0.9rem;
 }

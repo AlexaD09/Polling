@@ -50,7 +50,7 @@
                   <th>Correo</th>
                   <th>Título / Descripción</th>
                   <th>Estado</th>
-                  <th>Fecha</th>
+                  
                 </tr>
               </thead>
               <tbody>
@@ -79,11 +79,11 @@
             <form id="registroEmpleadoForm">
               <div class="mb-3">
                 <label for="nombreEmpleado" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombreEmpleado" required />
+                <input type="text" class="form-control" placeholder="Juan Pablo Pérez García" id="nombreEmpleado" required />
               </div>
               <div class="mb-3">
                 <label for="correoEmpleado" class="form-label">Correo</label>
-                <input type="email" class="form-control" id="correoEmpleado" required />
+                <input type="email" class="form-control" placeholder="correo@ejemplo.com" id="correoEmpleado" required />
               </div>
               <small class="text-muted">La contraseña será la misma para todos los empleados.</small><br/>
               <button type="submit" class="btn btn-success mt-2">Registrar</button>
@@ -99,12 +99,11 @@
           <div class="card-header bg-secondary text-white">Usuarios Registrados</div>
           <div class="card-body table-responsive">
             <table class="table table-bordered" id="tablaUsuarios">
-              <thead>
+              <thead class="table-dark">
                 <tr>
                   <th>Nombre</th>
                   <th>Correo</th>
                   <th>Rol</th>
-                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -131,9 +130,17 @@
             <div class="card">
               <div class="card-body table-responsive">
                 <table class="table table-striped" id="tablaQuejasOficina">
-                  <thead>
-                    <tr><th>Usuario</th><th>Título</th><th>Estado</th><th>Fecha</th><th>Acciones</th></tr>
-                  </thead>
+                  <thead class="table-dark">
+                <tr>
+                  <th>ID</th>
+                  <th>Cliente</th>
+                  <th>Correo</th>
+                  <th>Título</th>
+                  <th>Descripción</th>
+                  <th>Estado</th>
+                  
+                </tr>
+              </thead>
                   <tbody>
                     <!-- Quejas oficina se cargan aquí -->
                   </tbody>
@@ -146,9 +153,17 @@
             <div class="card">
               <div class="card-body table-responsive">
                 <table class="table table-striped" id="tablaQuejasWeb">
-                  <thead>
-                    <tr><th>Nombre</th><th>Correo</th><th>Descripción</th><th>Fecha</th></tr>
-                  </thead>
+                  <thead class="table-dark">
+                <tr>
+                  <th>ID</th>
+                  <th>Cliente</th>
+                  <th>Correo</th>
+                  <th>Título</th>
+                  <th>Descripción</th>
+                  <th>Estado</th>
+                  
+                </tr>
+              </thead>
                   <tbody>
                     <!-- Quejas web se cargan aquí -->
                   </tbody>
@@ -165,5 +180,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="static/script_reporte.js"></script>
 </body>
 </html>

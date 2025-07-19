@@ -18,6 +18,7 @@ async def get_usuario_por_correo(db: AsyncSession, correo: str):
             "id_usuario": row.id_usuario,
             "nombre": row.nombre,
             "correo": row.correo,
+            "contraseña": row.contraseña,
             "rol": row.rol
         }
     return None
@@ -38,3 +39,21 @@ async def create_usuario(db: AsyncSession, usuario):
         "rol": rol_valido
     })
     await db.commit()
+    return await get_usuario_por_correo(db, usuario.correo)
+
+#Obtener datos de postgresql
+
+async def get_todos_los_usuarios(db: AsyncSession):
+    query = text("SELECT * FROM obtener_todos_usuarios()")
+    result = await db.execute(query)
+    rows = result.mappings().all()
+
+    usuarios = []
+    for row in rows:
+        usuarios.append({
+            "id_usuario": row["id_usuario"],
+            "nombre": row["nombre"],
+            "correo": row["correo"],
+            "rol": row["rol"]
+        })
+    return usuarios
