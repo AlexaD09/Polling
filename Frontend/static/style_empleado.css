@@ -1,0 +1,99 @@
+/* Fondo general celeste clarito */
+body.bg-light {
+  background-color: #e1eaf0 !important; /* celeste muy suave */
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Navbar con azul oscuro */
+.navbar.navbar-dark.bg-dark {
+  background-color: #131052 !important; /* azul oscuro */
+  min-height: 70px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  position: relative;
+}
+
+/* Texto del navbar */
+.navbar-brand {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* Botón cerrar sesión */
+#btnLogout {
+    font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+/* Botón Registrar Queja - fondo oscuro */
+.btn-success {
+  background-color: #131052 !important; /* azul oscuro navbar */
+  border-color: #131052 !important;
+  color: white !important;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+.btn-success:hover {
+  background-color: #2e86de !important; /* azul brillante hover */
+  border-color: #2e86de !important;
+  color: white !important;
+}
+
+/* Fondo azul oscuro para headers de cards */
+.card-header.bg-primary, 
+.card-header.bg-secondary {
+  background-color: #131052 !important; /* azul oscuro */
+  color: white !important;
+  font-weight: 600;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Tablas con fondo azul oscuro */
+.table {
+  background-color: #1a1a2e; /* azul muy oscuro */
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  
+}
+/* Solo celdas del cuerpo (td) con texto negro */
+.table td {
+  color: black !important;
+}
+
+/* Solo los encabezados (th) con texto blanco y fondo azul */
+.table thead th {
+  background-color: #221e71 !important; /* azul oscuro */
+  color: white !important;
+  font-weight: 700;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  border-bottom: 2px solid #14146c;
+}
+
+
+
+/* Bordes de filas */
+.table tbody tr {
+  border-bottom: 1px solid #151c53;
+}
+
+/* Hover con fondo azul claro */
+.table tbody tr:hover {
+  background-color: #2e86de88; /* azul semi-transparente */
+  color: black !important;
+}
+
+/* Celdas texto negro para mejor visibilidad */
+.table td, .table th {
+  color: black !important;
+}
+
+/* Bordes más visibles */
+.table-bordered {
+  border: 1px solid #0d124b !important;
+}
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #0e134c !important;
+}
+
+

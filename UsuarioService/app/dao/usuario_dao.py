@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
-from UsuarioService.app.auth.auth_handler import get_password_hash
+from app.auth.auth_handler import get_password_hash
 from passlib.context import CryptContext
 
 

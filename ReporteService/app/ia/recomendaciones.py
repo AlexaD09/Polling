@@ -2,9 +2,10 @@ from groq import Groq
 from dotenv import load_dotenv
 import os
 from typing import List
-from ReporteService.app.models.dto_reporte import QuejaCombinadaDTO
+from app.models.dto_reporte import QuejaCombinadaDTO
 
 load_dotenv()
+#Carga las variables desde .env
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 qclient = Groq(api_key=GROQ_API_KEY)
 
@@ -15,6 +16,7 @@ def resumen_a_texto(quejas: List[QuejaCombinadaDTO]) -> str:
         resumen[estado] = resumen.get(estado, 0) + 1
     return ", ".join(f"{k}: {v}" for k, v in resumen.items())
 
+#Funcion que genera una recomendacion cosumiendo una ia Groq
 async def generar_recomendaciones(quejas: List[QuejaCombinadaDTO]) -> str:
     if not quejas:
         return "No hay quejas para analizar."

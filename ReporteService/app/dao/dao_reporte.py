@@ -1,7 +1,9 @@
 import httpx
-from ReporteService.app.models.dto_reporte import QuejaCombinadaDTO, UsuarioDTO
-from ReporteService.app.dao.dao_quejas_web import obtener_quejas_web
-from ReporteService.app.dao.dao_quejas_oficina import obtener_quejas_oficina
+from app.models.dto_reporte import QuejaCombinadaDTO, UsuarioDTO
+from app.dao.dao_quejas_web import obtener_quejas_web
+from app.dao.dao_quejas_oficina import obtener_quejas_oficina
+
+#Realiza el dao acceso combinado a los mos microservicios QuejasOficinaService y QuejasWebService
 
 async def obtener_quejas_combinadas() -> list[QuejaCombinadaDTO]:
     quejas_web = await obtener_quejas_web()
@@ -34,7 +36,7 @@ async def obtener_quejas_combinadas() -> list[QuejaCombinadaDTO]:
     return combinadas
 
 
-#DAO obtener usuariosasync def obtener_usuarios():
+#DAO obtener usuariosasync def obtener_usuarios() desde el microservicio UsuarioService:
 async def obtener_usuarios() -> list[UsuarioDTO]:
     async with httpx.AsyncClient() as client:
         resp = await client.get("http://localhost:8000/usuarios/usuarios")  # URL local directa

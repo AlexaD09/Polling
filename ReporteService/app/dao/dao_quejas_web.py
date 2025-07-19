@@ -1,6 +1,7 @@
 import httpx
-from ReporteService.app.models.dto_quejas_web import QuejaWebDTO
+from app.models.dto_quejas_web import QuejaWebDTO
 
+#Obtiene las quejas desde el microservicio QuejasWebService
 async def obtener_quejas_web() -> list[QuejaWebDTO]:
     async with httpx.AsyncClient() as client:
         resp = await client.get("http://localhost:8001/quejas-web/")
@@ -21,7 +22,7 @@ async def obtener_quejas_web() -> list[QuejaWebDTO]:
             quejas.append(QuejaWebDTO(**queja_dict))
         return quejas
 
-
+#Obtiene las quejas por id desde el microservisio de QuejasWebService
 async def obtener_quejas_por_usuario(id_usuario: str, token: str) -> list[QuejaWebDTO]:
     async with httpx.AsyncClient() as client:
         headers = {"Authorization": f"Bearer {token}"}

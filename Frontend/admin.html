@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <title>Panel de Administrador</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="static/images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="static/style_admin.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     .recomendaciones { display: none; }
@@ -11,17 +13,18 @@
 </head>
 <body class="bg-light">
 
-
-  <div class="container mt-5">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
-      <a class="navbar-brand" href="#">Dashboard Administrador</a>
-      <button id="btnLogout" onclick="window.location.href='/index.html'" class="btn btn-outline-light" >Cerrar sesión</button>
+  <!-- Navbar igual que en empleado.html -->
+  <nav class="navbar navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">Dashboard Administrador</span>
+      <button id="btnLogout" onclick="window.location.href='/index.html'" class="btn btn-outline-light">Cerrar sesión</button>
     </div>
-  </nav>  
+  </nav>
+
+  <div class="container">
 
     <!-- Pestañas principales -->
-    <ul class="nav nav-tabs" id="adminTabs" role="tablist">
+    <ul class="nav nav-tabs mb-4" id="adminTabs" role="tablist">
       <li class="nav-item" role="presentation">
         <button class="nav-link active" id="inicio-tab" data-bs-toggle="tab" data-bs-target="#inicio" type="button" role="tab">Inicio</button>
       </li>
@@ -36,25 +39,24 @@
       </li>
     </ul>
 
-    <div class="tab-content mt-3" id="adminTabsContent">
+    <div class="tab-content" id="adminTabsContent">
       <!-- INICIO -->
       <div class="tab-pane fade show active" id="inicio" role="tabpanel" aria-labelledby="inicio-tab">
         <div class="card mb-4">
           <div class="card-header bg-warning text-dark">Reporte Combinado de Quejas</div>
           <div class="card-body table-responsive">
-            <table class="table table-striped" id="tablaCombinada">
-              <thead>
+            <table class="table table-striped table-bordered" id="tablaCombinada">
+              <thead class="table-dark">
                 <tr>
                   <th>Origen</th>
                   <th>Cliente</th>
                   <th>Correo</th>
                   <th>Título / Descripción</th>
                   <th>Estado</th>
-                  
                 </tr>
               </thead>
               <tbody>
-                <!-- Aquí se llenarán las quejas combinadas -->
+                <!-- Quejas combinadas -->
               </tbody>
             </table>
           </div>
@@ -68,7 +70,6 @@
         </div>
 
         <button class="btn btn-primary mb-3" onclick="mostrarRecomendaciones()">Ver Recomendaciones</button>
-        
       </div>
 
       <!-- EMPLEADOS -->
@@ -107,7 +108,7 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- Aquí se cargarán los usuarios -->
+                <!-- Usuarios cargados -->
               </tbody>
             </table>
           </div>
@@ -126,60 +127,63 @@
         </ul>
 
         <div class="tab-content" id="quejasSubTabsContent">
+          <!-- Oficina -->
           <div class="tab-pane fade show active" id="oficina" role="tabpanel" aria-labelledby="oficina-tab">
             <div class="card">
+              <div class="card-header bg-secondary text-white">Quejas Registradas - Oficina</div>
               <div class="card-body table-responsive">
-                <table class="table table-striped" id="tablaQuejasOficina">
+                <table class="table table-bordered table-hover" id="tablaQuejasOficina">
                   <thead class="table-dark">
-                <tr>
-                  <th>ID</th>
-                  <th>Cliente</th>
-                  <th>Correo</th>
-                  <th>Título</th>
-                  <th>Descripción</th>
-                  <th>Estado</th>
-                  
-                </tr>
-              </thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Cliente</th>
+                      <th>Correo</th>
+                      <th>Título</th>
+                      <th>Descripción</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
                   <tbody>
-                    <!-- Quejas oficina se cargan aquí -->
+                    <!-- Oficina quejas -->
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
 
+          <!-- Web -->
           <div class="tab-pane fade" id="web" role="tabpanel" aria-labelledby="web-tab">
             <div class="card">
+              <div class="card-header bg-secondary text-white">Quejas Registradas - Web</div>
               <div class="card-body table-responsive">
-                <table class="table table-striped" id="tablaQuejasWeb">
+                <table class="table table-bordered table-hover" id="tablaQuejasWeb">
                   <thead class="table-dark">
-                <tr>
-                  <th>ID</th>
-                  <th>Cliente</th>
-                  <th>Correo</th>
-                  <th>Título</th>
-                  <th>Descripción</th>
-                  <th>Estado</th>
-                  
-                </tr>
-              </thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Cliente</th>
+                      <th>Correo</th>
+                      <th>Título</th>
+                      <th>Descripción</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
                   <tbody>
-                    <!-- Quejas web se cargan aquí -->
+                    <!-- Web quejas -->
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
 
-   
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="static/script_reporte.js"></script>
+
 </body>
 </html>

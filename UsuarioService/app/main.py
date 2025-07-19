@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pathlib import Path
-from UsuarioService.app.routes import router 
+from app.routes import router 
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
@@ -8,9 +8,9 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(title="Usuario Service")
 
-static_dir = Path(__file__).resolve().parents[2] / "Frontend" / "static"
+frontend_path = Path(__file__).parent.parent.parent / "Frontend" / "static"
+app.mount("/static", StaticFiles(directory=str(frontend_path)), name="static")
 
-app.mount("/static", StaticFiles(directory=static_dir), name="static")
 # CORS
 origins = [
     "http://localhost:8080",

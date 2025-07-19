@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from typing import Union, Any
 from jose import jwt
 from passlib.context import CryptContext
-from UsuarioService.app.config_usuario import SECRET_KEY,ALGORITHM
+from app.config_usuario import SECRET_KEY,ALGORITHM
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

@@ -1,4 +1,4 @@
-// Función para decodificar JWT (igual que antes)
+// Función para decodificar JWT 
 function parseJwt(token) {
   if (!token) return null;
   const base64Url = token.split('.')[1];
@@ -13,14 +13,14 @@ function parseJwt(token) {
   return JSON.parse(jsonPayload);
 }
 
-
+//Funcion para enviar nueva queja.
 async function enviarQueja() {
-  
+  //Obtiene los valores del formulario
   const nombre= document.getElementById("nombre").value.trim();
   const correo = document.getElementById("correo").value.trim();
   const titulo = document.getElementById("tituloQueja").value.trim();
   const descripcion = document.getElementById("descripcion").value.trim();
-
+  //verifica si hay un token de sesion
   const token = localStorage.getItem('access_token');
   
   if (!token) {
@@ -29,15 +29,17 @@ async function enviarQueja() {
     return;
   }
 
+  //valida que todos los campos esten completos
   if (!nombre || !correo || !titulo || !descripcion) {
     alert("Completa todos los campos");
     return;
   }
 
-  const decodedToken = parseJwt(token);
-  
+   //decodifica el token para obtener datos como el id de usuario
+  const decodedToken = parseJwt(token);  
   const id_usuario = decodedToken.sub;
 
+  //Crea el objeto con los datos de la nueva queja
   const nuevaQueja = {
     id_usuario: id_usuario,
     nombre_cliente: nombre ,
@@ -46,10 +48,12 @@ async function enviarQueja() {
     descripcion: descripcion
   };
 
+  //Muestra los datos que se van a enviar
   console.log("Enviando queja:", nuevaQueja);
   console.log("Token:", token);
 
   try {
+    //Envia la queja al backend
     const res = await fetch("http://localhost:8002/oficina/quejas-oficina/", {
       method: "POST",
       headers: {
@@ -63,7 +67,7 @@ async function enviarQueja() {
 
     alert("Queja registrada correctamente.");
 
-    // ✅ Limpiar todos los campos del formulario
+    //  Limpiar todos los campos del formulario
     document.getElementById("formQueja").reset();  // 👈 Esto sí funciona si apuntas bien al form
 
   } catch (error) {
@@ -73,12 +77,13 @@ async function enviarQueja() {
 }
 
 console.log("👀 Ejecutando cargarQuejasOficina...");
-
+//Cargar las quejas de la oficina desde el backend
 async function cargarQuejasOficina() {
   const token = localStorage.getItem("access_token");
   if (!token) return;
   const decoded = parseJwt(token);
     try{
+      //Obtiene las quejas desde el backend
      const res = await fetch("http://localhost:8003/api/reporte/oficina",{
        headers: {
          "Authorization": `Bearer ${token}`
@@ -88,12 +93,13 @@ async function cargarQuejasOficina() {
 
   if (!res.ok) throw new Error("No se pudieron cargar las quejas");
 
-  const quejas = await res.json();
+  const quejas = await res.json(); //Convierte la respuesta a json
 
   console.log("📦 Quejas recibidas:", quejas); // 👈 Ver si llega
   const tbody = document.querySelector("#tablaQuejasOficina tbody");
-  tbody.innerHTML = "";
+  tbody.innerHTML = ""; //limpiar toda la tabla
 
+  //Crear una fila por cada queja
    quejas.forEach(q => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
@@ -121,24 +127,25 @@ async function cargarQuejasOficina() {
 
 // Evento para cerrar sesión
 document.getElementById("btnLogout").addEventListener("click", function () {
-  localStorage.removeItem("access_token");
+  localStorage.removeItem("access_token"); //Elimina el token
   console.log("🔐 Token eliminado. Cerrando sesión...");
   window.location.href = "/index.html";  // Redirige al login o página de inicio
 });
 
 
 document.getElementById("formQueja").addEventListener("submit", function (e) {
-  e.preventDefault();
-  enviarQueja().then(cargarQuejasOficina);
+  e.preventDefault();//Evita recargar la pagina
+  enviarQueja().then(cargarQuejasOficina); // envia la queja y recarga la tabla
 });
 
-
+//Funcion para cambiar el estado de la accion
 async function cambiarEstadoOficina(id_queja, nuevoEstado) {
    console.log("ID queja a cambiar:", id_queja);
   const token = localStorage.getItem("access_token");
   if (!token) return;
  
   try {
+    //Envia la actualizacion la backend
     const res = await fetch(`http://localhost:8002/oficina/quejas-oficina/${id_queja}/estado?nuevo_estado=${nuevoEstado}`, {
       method: "PUT",
       headers: {
@@ -157,6 +164,7 @@ async function cambiarEstadoOficina(id_queja, nuevoEstado) {
   }
 }
 
+//Funcion cargar quejas web
 async function cargarQuejasWeb() {
   const token = localStorage.getItem("access_token");
   if (!token) return;
@@ -198,7 +206,7 @@ async function cargarQuejasWeb() {
   }
 }
 
-
+//Funcion para cambiar el estado de la queja web
 async function cambiarEstadoWeb(id, nuevoEstado) {
   const token = localStorage.getItem("access_token");
 
@@ -221,6 +229,6 @@ async function cambiarEstadoWeb(id, nuevoEstado) {
 }
 
 window.onload = () => {
-  cargarQuejasOficina();
-  cargarQuejasWeb(); // si también lo tienes
+  cargarQuejasOficina();//carga las quejas de oficina
+  cargarQuejasWeb(); // carga las quejas del sitio web
 };

@@ -1,10 +1,10 @@
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from fastapi import Depends, HTTPException, status
+from fastapi import  HTTPException, status
 from jose import jwt, JWTError
 from typing import Optional
 from fastapi import Request  # 👈 Añadido
 
-from UsuarioService.app.auth.auth_handler import SECRET_KEY, ALGORITHM
+from app.auth.auth_handler import SECRET_KEY, ALGORITHM
 
 class JWTBearer(HTTPBearer):
     def __init__(self, auto_error: bool = True):

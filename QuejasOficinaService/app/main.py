@@ -1,11 +1,15 @@
 from fastapi import FastAPI
-from QuejasOficinaService.app.routes import router
+from fastapi.staticfiles import StaticFiles
+from app.routes import router
 import uvicorn
+from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
+#Intsancia de fastapi 
+app = FastAPI() 
 
-app = FastAPI()
-
-# CORS
+frontend_path = Path(__file__).parent.parent.parent / "Frontend" / "static"
+app.mount("/static", StaticFiles(directory=str(frontend_path)), name="static")
+# CORS permite al backend responder solicitudes desde otros dominios
 origins = [
     "http://localhost:8080",
     "http://127.0.0.1:8080",

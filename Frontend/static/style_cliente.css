@@ -1,0 +1,47 @@
+/* Fondo general celeste clarito */
+body.bg-light {
+  background-color: #e1eaf0 !important; /* celeste muy suave */
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+/* Fondo navbar (Dashboard Cliente) */
+.navbar.bg-primary {
+  background-color: #131052 !important;
+  width: 100%;
+  min-height: 90px; /* altura mínima para agrandar */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  position: relative;
+}
+
+/* Agrandar texto del título */
+.navbar-brand {
+  font-size: 2.5rem; /* tamaño grande */
+  font-weight: 800;
+  color: white; /* para asegurarnos que contraste */
+}
+
+
+/* Botón enviar queja */
+.btn-primary {
+  background-color: #061732 !important;
+  border-color: #061732 !important;
+  color: white;
+}
+
+/* Agrandar la altura del navbar */
+.navbar {
+  min-height: 80px; /* Ajusta la altura */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  position: relative;
+}
+
+/* Botón cerrar sesión */
+#btnLogout {
+    font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+

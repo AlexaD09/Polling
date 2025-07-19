@@ -16,12 +16,13 @@ function parseJwt(token) {
 //Carga el reporte cobinado del microservicio Resporteservice
 async function cargarReporteCombinado() {
   const resp = await fetch("http://localhost:8003/api/reporte/combinado");
-  const data = await resp.json();
-  console.log("Datos completos recibidos:", data);  // 👈 imprimir todo
-  const resumen_estado = generarResumenEstados(data); 
+  const data = await resp.json();//obtiene los datos en formatos json
+  console.log("Datos completos recibidos:", data);  //  imprimir todo
+  const resumen_estado = generarResumenEstados(data); //generar un resumen por estado
   const tbody = document.querySelector("#tablaCombinada tbody");
-  tbody.innerHTML = "";
+  tbody.innerHTML = "";// limpia contenido previo
 
+  //Llena la tabla con los datos recibidos
   data.forEach(q => {
     const row = `<tr>
       <td>${q.origen}</td><td>${q.nombre}</td>
@@ -31,14 +32,14 @@ async function cargarReporteCombinado() {
     tbody.innerHTML += row;
   });
 
-  generarGrafica(resumen_estado);
+  generarGrafica(resumen_estado); //Dibuja una grafica con los etados  
 }
 
 //Funcion para cargar las recomendacines generadas con ia
 async function mostrarRecomendaciones() {
   const resp = await fetch("http://localhost:8003/api/recomendaciones");
-  const data = await resp.json();
-  alert("Recomendación: " + data.recomendacion);
+  const data = await resp.json();//Obtiene la recomendacion
+  alert("Recomendación: " + data.recomendacion);// muestra una alestra con la recomendacion
 }
 
 //Funcion que genera la grafica con el resumen que tenemos despues de cargar el dto combinado
@@ -78,14 +79,17 @@ function generarResumenEstados(quejas) {
 
 document.getElementById("registroEmpleadoForm").addEventListener("submit", async function(e) {
   e.preventDefault();
+  // Obtiene datos del formulario
   const nombre = document.getElementById("nombreEmpleado").value.trim();
   const correo = document.getElementById("correoEmpleado").value.trim();
 
+  // Valida campos
   if (!nombre || !correo) {
     alert("Completa todos los campos");
     return;
   }
 
+  // Datos fijos para empleados
   const data = {
     nombre,
     correo,
@@ -97,6 +101,7 @@ document.getElementById("registroEmpleadoForm").addEventListener("submit", async
 
 
   try {
+    // Envía los datos al backend
     const res = await fetch("http://localhost:8000/usuarios/registro", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -123,6 +128,7 @@ async function cargarQuejasWeb() {
         "Authorization": `Bearer ${token}`
       }
     });
+    
 
     if (!res.ok) throw new Error("No se pudieron cargar las quejas web");
 

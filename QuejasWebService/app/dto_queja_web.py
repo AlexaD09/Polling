@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 from datetime import datetime
-
+#DTO para crear la queja con todos los campos necesarios
 class QuejaCreate(BaseModel):
     id_usuario: str
     nombre: str

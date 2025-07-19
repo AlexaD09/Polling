@@ -1,11 +1,11 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
-from UsuarioService.app.dao import usuario_dao
-from UsuarioService.app.dto_usuario import UsuarioCreate, Usuario, LoginData, UsuarioDTO
-from UsuarioService.app.database import get_db
-from UsuarioService.app.auth.auth_bearer import JWTBearer
-from UsuarioService.app.auth.auth_handler import create_access_token
+from app.dao import usuario_dao
+from app.dto_usuario import UsuarioCreate, Usuario, LoginData, UsuarioDTO
+from app.database import get_db
+from app.auth.auth_bearer import JWTBearer
+from app.auth.auth_handler import create_access_token
 
 
 router = APIRouter()

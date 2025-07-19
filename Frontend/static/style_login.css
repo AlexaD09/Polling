@@ -1,0 +1,43 @@
+/* Fondo general */
+body {
+  margin: 0;
+  height: 100vh;
+  background: url('/static/images/fondo1 .jpg') no-repeat center center fixed;
+  background-size: cover;
+  backdrop-filter: brightness(0.8);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilo para el cuadro del login */
+.login-card {
+  background: linear-gradient(to bottom,white,hwb(219 69% 21%),hwb(219 24% 64%) 110%);
+  backdrop-filter: blur(5px);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  color: #000;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Cambiar tamaño personalizado */
+.custom-width {
+  width: 100%;
+  max-width: 600px;
+  min-height: 500px;
+}
+
+/* Estilo personalizado para el botón de ingresar */
+.btn-primary {
+  background-color: #061732 !important;
+  border-color: #061732 !important;
+  color: white;
+}
+
+
+.btn-primary:hover {
+  background: #777192;
+  transform: scale(1.02);
+}
+
+.btn-link{
+  color: #061732  !important;
+}

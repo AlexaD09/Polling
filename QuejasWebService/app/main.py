@@ -21,6 +21,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 @app.on_event("startup")
 async def startup_event():
     print("✅ Microservicio de quejas iniciado")

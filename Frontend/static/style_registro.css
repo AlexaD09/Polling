@@ -1,0 +1,42 @@
+/* Fondo general */
+body {
+  margin: 0;
+  height: 100vh;
+  background: url('/static/images/fondo1 .jpg') no-repeat center center fixed;
+  background-size: cover;
+  backdrop-filter: brightness(0.8);
+}
+
+/* Estilo para el cuadro del login */
+.registro-card {
+  background: linear-gradient(to bottom,white,rgb(124, 124, 138));
+  backdrop-filter: blur(5px);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  color: #000;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Cambiar tamaño personalizado */
+.custom-width {
+  width: 130%;
+  max-width: 700px;
+  min-height: 550px;
+}
+
+/* Estilo personalizado para el botón de ingresar */
+.btn-success {
+  background-color: #061732 !important;
+  border-color: #061732 !important;
+  color: white;
+}
+
+
+.btn-primary:hover {
+  background: #777192;
+  transform: scale(1.02);
+}
+
+.btn-link{
+  color: #f0f4f9  !important;
+}

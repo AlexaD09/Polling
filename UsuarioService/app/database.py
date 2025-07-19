@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
-from UsuarioService.app.config_usuario import PSSW_POSTGRE
+from app.config_usuario import PSSW_POSTGRE
 
 DATABASE_URL = f"postgresql+asyncpg://postgres:{PSSW_POSTGRE}@localhost:5432/quejas_db"
 

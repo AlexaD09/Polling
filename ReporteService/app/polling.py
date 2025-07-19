@@ -4,13 +4,13 @@ import asyncio
 import traceback
 from typing import List
 
-from ReporteService.app.dao.dao_reporte import obtener_quejas_combinadas, obtener_usuarios
-from ReporteService.app.dao.dao_quejas_web import obtener_quejas_web
-from ReporteService.app.dao.dao_quejas_oficina import obtener_quejas_oficina
+from app.dao.dao_reporte import obtener_quejas_combinadas, obtener_usuarios
+from app.dao.dao_quejas_web import obtener_quejas_web
+from app.dao.dao_quejas_oficina import obtener_quejas_oficina
 
-from ReporteService.app.models.dto_reporte import QuejaCombinadaDTO, UsuarioDTO
-from ReporteService.app.models.dto_quejas_web import QuejaWebDTO
-from ReporteService.app.models.dto_quejas_oficina import QuejaOficinaDTO
+from app.models.dto_reporte import QuejaCombinadaDTO, UsuarioDTO
+from app.models.dto_quejas_web import QuejaWebDTO
+from app.models.dto_quejas_oficina import QuejaOficinaDTO
 
 # ===================
 # Cachés y Locks
@@ -108,7 +108,7 @@ async def obtener_cache_oficina() -> List[QuejaOficinaDTO]:
 # Polling general
 # ===================
 
-async def polling_periodico(intervalo_segundos: int = 30):
+async def polling_periodico(intervalo_segundos: int = 10):
     while True:
         print("[Polling] Ejecutando ciclo de actualización de caches...")
         await actualizar_cache_combinadas()

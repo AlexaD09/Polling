@@ -1,10 +1,15 @@
 import asyncio
 from fastapi import FastAPI
+from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
-from ReporteService.app.routes import router as reporte_router
-from ReporteService.app.polling import polling_periodico
+from fastapi.staticfiles import StaticFiles
+from app.routes import router as reporte_router
+from app.polling import polling_periodico
 
 app = FastAPI()
+
+frontend_path = Path(__file__).parent.parent.parent / "Frontend" / "static"
+app.mount("/static", StaticFiles(directory=str(frontend_path)), name="static")
 
 origins = [
     "http://localhost:8080",

@@ -1,0 +1,7 @@
+# Frontend/Dockerfile
+FROM nginx:alpine
+
+# Copiar todo el contenido de la carpeta Frontend al directorio donde nginx sirve archivos estáticos
+COPY . /usr/share/nginx/html
+
+EXPOSE 80
