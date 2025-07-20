@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 class LoginData(BaseModel):
     correo: str
-    contraseña: str
+    pssw: str
 
 # DTO de entrada para registro
 class UsuarioBase(BaseModel):
@@ -12,7 +12,7 @@ class UsuarioBase(BaseModel):
 
 # DTO solo para uso interno (validación en backend, incluye contraseña hasheada)
 class UsuarioCreate(UsuarioBase):
-    contraseña: str
+    pssw: str
 
 class Usuario(UsuarioBase):
     id_usuario: int

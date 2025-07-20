@@ -1,6 +1,6 @@
 from bson.objectid import ObjectId
 
-class QuejaDAO:
+class QuejaDAO: 
     def __init__(self, db):
         self.collection = db['quejas']
 #Crear queja en mongo o insterta nueva queja en la colecion de mongo

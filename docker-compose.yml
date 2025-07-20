@@ -1,54 +1,110 @@
 
 services:
-  postgres:
-    image: postgres:14
-    container_name: postgres-db
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: quejas_db
-    volumes:
-      - pg_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
 
-  mongo:
-    image: mongo:5
-    container_name: mongo-db
+  usuarioservice:
+    build: ./UsuarioService
+    container_name: usuarioservice
     ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-
-  usuario_service:
-    build: ./usuario_service
-    ports:
-      - "8001:8000"
+      - "8000:8000"
     depends_on:
       - postgres
+    volumes:
+      - ./UsuarioService/.env:/app/.env  
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:ALEXA1209@postgres:5432/quejas_db
+    networks:
+      - polling_net
 
-  quejas_web_service:
-    build: ./quejas_web_service
+  quejasoficinaservice:
+    build: ./QuejasOficinaService
+    container_name: quejasoficinaservice
     ports:
       - "8002:8000"
     depends_on:
-      - mongo
+      - postgres
+    environment:
+      - DATABASE_URL=postgresql://postgres:ALEXA1209@postgres:5432/quejas_db
+    volumes:
+      - ./QuejasOficinaService/.env:/app/.env 
+    networks:
+      - polling_net
 
-  quejas_oficina_service:
-    build: ./quejas_oficina_service
+  quejaswebservice:
+    build: ./QuejasWebService
+    container_name: quejaswebservice
+    ports:
+      - "8001:8000"
+    depends_on:
+      mongo_web:
+        condition: service_healthy
+    environment:
+      - MONGO_URL=mongodb://mongo_web:27017/quejas_db?replicaSet=rs0
+    networks:
+      - polling_net
+
+  reporteservice:
+    build: ./ReporteService
+    container_name: reporteservice
     ports:
       - "8003:8000"
+    volumes:
+      - ./ReporteService/.env:/app/.env  
     depends_on:
-      - postgres
+      - usuarioservice
+      - quejaswebservice
+      - quejasoficinaservice
+    networks:
+      - polling_net
 
-  reportes_service:
-    build: ./reportes_service
+  frontend:
+    build: ./Frontend
+    container_name: frontend
     ports:
-      - "8004:8000"
-    depends_on:
-      - mongo
-      - postgres
+      - "8080:80"
+    networks:
+      - polling_net
 
-volumes:
-  pg_data:
-  mongo_data:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ALEXA1209
+      POSTGRES_DB: quejas_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init/init-pg.sql:/docker-entrypoint-initdb.d/init-pg.sql
+    networks:
+      - polling_net
+
+  mongo_web:
+    image: mongo:6
+    container_name: mongo_web
+    ports:
+      - "27018:27017"
+    networks:
+      - polling_net
+    volumes:
+      - ./init/mongo_dump:/dump:ro
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: >
+      sh -c "
+        mongod --bind_ip_all --replSet rs0 & 
+        sleep 10 &&
+        mongosh --eval 'rs.initiate()' &&
+        sleep 10 &&
+        mongorestore --db quejas_db --drop /dump/quejas_db &&
+        tail -f /dev/null
+      "
+
+
+
+      
+networks:
+  polling_net:
+    driver: bridge

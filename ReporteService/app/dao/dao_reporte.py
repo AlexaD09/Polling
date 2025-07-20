@@ -39,6 +39,6 @@ async def obtener_quejas_combinadas() -> list[QuejaCombinadaDTO]:
 #DAO obtener usuariosasync def obtener_usuarios() desde el microservicio UsuarioService:
 async def obtener_usuarios() -> list[UsuarioDTO]:
     async with httpx.AsyncClient() as client:
-        resp = await client.get("http://localhost:8000/usuarios/usuarios")  # URL local directa
+        resp = await client.get("http://usuarioservice:8000/usuarios/usuarios")  # URL local directa
         resp.raise_for_status()
         return [UsuarioDTO(**u) for u in resp.json()]

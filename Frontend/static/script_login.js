@@ -20,13 +20,13 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
 
    // Obtiene los valores ingresados por el usuario en los campos de correo y contraseña
   const correo = document.getElementById("correo").value;
-  const contraseña = document.getElementById("contraseña").value;
+  const pssw = document.getElementById("contraseña").value;
 
    // Hace una solicitud POST al endpoint del backend para iniciar sesión
   const res = await fetch("http://localhost:8000/usuarios/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ correo, contraseña })
+    body: JSON.stringify({ correo, pssw })
   });
   
   // Convierte la respuesta del servidor a un objeto JSON

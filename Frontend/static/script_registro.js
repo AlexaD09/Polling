@@ -6,10 +6,10 @@ document.getElementById("registroForm").addEventListener("submit", async functio
   // Obtenemos y limpiamos los valores ingresados por el usuario
   const nombre = document.getElementById("nombre").value.trim();
   const correo = document.getElementById("correoRegistro").value.trim();
-  const contraseña = document.getElementById("contraseñaRegistro").value.trim();
+  const pssw = document.getElementById("contraseñaRegistro").value.trim();
 
   // Validamos que todos los campos tengan valor
-  if (!nombre || !correo || !contraseña) {
+  if (!nombre || !correo || !pssw) {
     // Si algún campo está vacío, mostramos un mensaje de error
     document.getElementById("mensaje").innerText = "Por favor completa todos los campos.";
     return; // Detenemos la ejecución si hay campos vacíos
@@ -19,7 +19,7 @@ document.getElementById("registroForm").addEventListener("submit", async functio
   const res = await fetch("http://localhost:8000/usuarios/registro", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ nombre, correo, contraseña }),
+  body: JSON.stringify({ nombre, correo, pssw }),
 });
 
 // Convertimos la respuesta del servidor a un objeto JavaScript (JSON)
@@ -42,9 +42,9 @@ document.getElementById("registroForm").addEventListener("submit", async functio
 
   const nombre = document.getElementById("nombre").value.trim();
   const correo = document.getElementById("correoRegistro").value.trim();
-  const contraseña = document.getElementById("contraseñaRegistro").value.trim();
+  const pssw = document.getElementById("contraseñaRegistro").value.trim();
 
-  if (!nombre || !correo || !contraseña) {
+  if (!nombre || !correo || !pssw) {
     document.getElementById("mensaje").innerText = "Por favor completa todos los campos.";
     return;
   }
@@ -52,7 +52,7 @@ document.getElementById("registroForm").addEventListener("submit", async functio
   const res = await fetch("http://localhost:8000/usuarios/registro", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ nombre, correo, contraseña }),
+  body: JSON.stringify({ nombre, correo, pssw }),
 });
 
 const data = await res.json();

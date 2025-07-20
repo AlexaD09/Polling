@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from QuejasWebService.app.routes import router
-from QuejasWebService.app.database import client
+from app.routes import router
+from app.database import client
 
 app = FastAPI()
 
@@ -9,9 +9,10 @@ app = FastAPI()
 
 
 origins = [
-    "http://localhost:8080",  # Tu frontend
+    "http://frontend:80",  # Tu frontend
     "http://127.0.0.1:8080",
-    "http://localhost:8081"  # Por si el navegador lo toma así
+    "http://localhost:8081",
+    "http://localhost:8080",  # Por si el navegador lo toma así
 ]
 
 app.add_middleware(

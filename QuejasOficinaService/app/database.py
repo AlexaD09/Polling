@@ -8,7 +8,8 @@ load_dotenv()
 PSSW_POSTGRE=os.getenv("PSSW_POSTGRE")
 
 # Conexion a la base de datos
-SQLALCHEMY_DATABASE_URL = f"postgresql://postgres:{PSSW_POSTGRE}@localhost:5432/quejas_db"
+SQLALCHEMY_DATABASE_URL =  f"postgresql://postgres:{PSSW_POSTGRE}@postgres:5432/quejas_db"
+
 #Crea el motor de la base de datos
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 #Crea una fabrica de sesiones

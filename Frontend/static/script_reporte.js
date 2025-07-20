@@ -93,7 +93,7 @@ document.getElementById("registroEmpleadoForm").addEventListener("submit", async
   const data = {
     nombre,
     correo,
-    contraseña: "empleado",  // fija la contraseña aquí
+    pssw: "empleado",  // fija la contraseña aquí
     rol: "empleado"          // fija el rol aquí
   };
 

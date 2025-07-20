@@ -7,14 +7,15 @@ from fastapi.middleware.cors import CORSMiddleware
 #Intsancia de fastapi 
 app = FastAPI() 
 
-frontend_path = Path(__file__).parent.parent.parent / "Frontend" / "static"
-app.mount("/static", StaticFiles(directory=str(frontend_path)), name="static")
+#frontend_path = Path(__file__).parent.parent.parent / "Frontend" / "static"
+#app.mount("/static", StaticFiles(directory=str(frontend_path)), name="static")
 # CORS permite al backend responder solicitudes desde otros dominios
 origins = [
-    "http://localhost:8080",
+     "http://frontend:80",
     "http://127.0.0.1:8080",
     "http://localhost:8081",
     "http://localhost:8082",
+    "http://localhost:8080",
     # Puedes agregar más orígenes si tienes otros frontends o ambientes
 ]
 

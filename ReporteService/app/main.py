@@ -8,12 +8,13 @@ from app.polling import polling_periodico
 
 app = FastAPI()
 
-frontend_path = Path(__file__).parent.parent.parent / "Frontend" / "static"
-app.mount("/static", StaticFiles(directory=str(frontend_path)), name="static")
+#frontend_path = Path(__file__).parent.parent.parent / "Frontend" / "static"
+#app.mount("/static", StaticFiles(directory=str(frontend_path)), name="static")
 
 origins = [
-    "http://localhost:8080",
+    "http://frontend:80",
     "http://127.0.0.1:8080",
+    "http://localhost:8080",
     
 ]
 

@@ -9,5 +9,5 @@ class Usuario(Base):
     id_usuario = Column(Integer, primary_key=True, index=True)
     nombre = Column(String(100), nullable=False)
     correo = Column(String(100), unique=True, nullable=False)
-    contraseña = Column(String(100), nullable=False)
+    pssw = Column(String(100), nullable=False)
     rol = Column(String(50), default="cliente")

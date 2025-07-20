@@ -8,13 +8,14 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(title="Usuario Service")
 
-frontend_path = Path(__file__).parent.parent.parent / "Frontend" / "static"
-app.mount("/static", StaticFiles(directory=str(frontend_path)), name="static")
+#frontend_path = Path(__file__).parent.parent.parent / "Frontend" / "static"
+#app.mount("/static", StaticFiles(directory=str(frontend_path)), name="static")
 
 # CORS
 origins = [
-    "http://localhost:8080",
+    "http://frontend:80",
     "http://localhost:8081",
+    "http://localhost:8080",
     # Puedes agregar más orígenes si tienes otros frontends o ambientes
 ]
 

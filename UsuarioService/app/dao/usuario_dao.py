@@ -18,24 +18,24 @@ async def get_usuario_por_correo(db: AsyncSession, correo: str):
             "id_usuario": row.id_usuario,
             "nombre": row.nombre,
             "correo": row.correo,
-            "contraseña": row.contraseña,
+            "pssw": row.pssw,
             "rol": row.rol
         }
     return None
 
 async def create_usuario(db: AsyncSession, usuario):
-    hashed_password = get_password_hash(usuario.contraseña)
+    hashed_password = get_password_hash(usuario.pssw)
 
     # Validar rol para seguridad, evitar inserción de roles no permitidos
     rol_valido = usuario.rol if usuario.rol in ["cliente", "empleado"] else "cliente"
 
     query = text(
-        "SELECT sp_create_usuario(:nombre, :correo, :contraseña, :rol)"
+        "SELECT sp_create_usuario(:nombre, :correo, :pssw, :rol)"
     )
     await db.execute(query, {
         "nombre": usuario.nombre,
         "correo": usuario.correo,
-        "contraseña": hashed_password,
+        "pssw": hashed_password,
         "rol": rol_valido
     })
     await db.commit()

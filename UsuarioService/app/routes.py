@@ -25,7 +25,7 @@ async def login(data: LoginData, db: AsyncSession = Depends(get_db)):
     usuario = await usuario_dao.get_usuario_por_correo(db, data.correo)
     if not usuario:
         raise HTTPException(status_code=400, detail="Correo o contraseña incorrectos")
-    if not usuario_dao.verify_password(data.contraseña, usuario["contraseña"]):
+    if not usuario_dao.verify_password(data.pssw, usuario["pssw"]):
         raise HTTPException(status_code=400, detail="Correo o contraseña incorrectos")
 
     
