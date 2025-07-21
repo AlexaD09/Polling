@@ -16,7 +16,7 @@ document.getElementById("registroForm").addEventListener("submit", async functio
   }
 
   // Hacemos una solicitud POST al backend para registrar al usuario
-  const res = await fetch("http://localhost:8000/usuarios/registro", {
+  const res = await fetch(`http://${IP_BACKEND}:8000/usuarios/registro`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ nombre, correo, pssw }),
@@ -49,7 +49,7 @@ document.getElementById("registroForm").addEventListener("submit", async functio
     return;
   }
 
-  const res = await fetch("http://localhost:8000/usuarios/registro", {
+  const res = await fetch(`http://${IP_BACKEND}:8000/usuarios/registro`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ nombre, correo, pssw }),

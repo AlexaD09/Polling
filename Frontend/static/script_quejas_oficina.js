@@ -1,3 +1,4 @@
+const IP_BACKEND = window.location.hostname; 
 // Función para decodificar JWT 
 function parseJwt(token) {
   if (!token) return null;
@@ -54,7 +55,8 @@ async function enviarQueja() {
 
   try {
     //Envia la queja al backend
-    const res = await fetch("http://localhost:8002/oficina/quejas-oficina/", {
+    
+    const res = await fetch(`http://${IP_BACKEND}:8002/oficina/quejas-oficina/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -84,7 +86,7 @@ async function cargarQuejasOficina() {
   const decoded = parseJwt(token);
     try{
       //Obtiene las quejas desde el backend
-     const res = await fetch("http://localhost:8003/api/reporte/oficina",{
+     const res = await fetch(`http://${IP_BACKEND}:8003/api/reporte/oficina`,{
        headers: {
          "Authorization": `Bearer ${token}`
      }
@@ -146,7 +148,7 @@ async function cambiarEstadoOficina(id_queja, nuevoEstado) {
  
   try {
     //Envia la actualizacion la backend
-    const res = await fetch(`http://localhost:8002/oficina/quejas-oficina/${id_queja}/estado?nuevo_estado=${nuevoEstado}`, {
+    const res = await fetch(`http://${IP_BACKEND}:8002/oficina/quejas-oficina/${id_queja}/estado?nuevo_estado=${nuevoEstado}`, {
       method: "PUT",
       headers: {
         "Authorization": `Bearer ${token}`
@@ -170,7 +172,7 @@ async function cargarQuejasWeb() {
   if (!token) return;
 
   try {
-    const res = await fetch("http://localhost:8003/api/reporte/web", {
+    const res = await fetch(`http://${IP_BACKEND}:8003/api/reporte/web`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
@@ -211,7 +213,7 @@ async function cambiarEstadoWeb(id, nuevoEstado) {
   const token = localStorage.getItem("access_token");
 
   try {
-    const res = await fetch(`http://localhost:8001/quejas-web/${id}/estado?nuevo_estado=${nuevoEstado}`, {
+    const res = await fetch(`http://${IP_BACKEND}:8001/quejas-web/${id}/estado?nuevo_estado=${nuevoEstado}`, {
       method: "PUT",
       headers: {
         "Authorization": `Bearer ${token}`

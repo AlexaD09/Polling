@@ -1,3 +1,4 @@
+
 // Función para decodificar JWT 
 function parseJwt(token) {
   if (!token) return null;
@@ -12,10 +13,10 @@ function parseJwt(token) {
   );
   return JSON.parse(jsonPayload);
 }
-
+const IP_BACKEND = window.location.hostname;
 //Carga el reporte cobinado del microservicio Resporteservice
-async function cargarReporteCombinado() {
-  const resp = await fetch("http://localhost:8003/api/reporte/combinado");
+async function cargarReporteCombinado() { 
+  const resp = await fetch(`http://${IP_BACKEND}:8003/api/reporte/combinado`);
   const data = await resp.json();//obtiene los datos en formatos json
   console.log("Datos completos recibidos:", data);  //  imprimir todo
   const resumen_estado = generarResumenEstados(data); //generar un resumen por estado
@@ -37,7 +38,7 @@ async function cargarReporteCombinado() {
 
 //Funcion para cargar las recomendacines generadas con ia
 async function mostrarRecomendaciones() {
-  const resp = await fetch("http://localhost:8003/api/recomendaciones");
+  const resp = await fetch(`http://${IP_BACKEND}:8003/api/recomendaciones`);
   const data = await resp.json();//Obtiene la recomendacion
   alert("Recomendación: " + data.recomendacion);// muestra una alestra con la recomendacion
 }
@@ -102,7 +103,7 @@ document.getElementById("registroEmpleadoForm").addEventListener("submit", async
 
   try {
     // Envía los datos al backend
-    const res = await fetch("http://localhost:8000/usuarios/registro", {
+    const res = await fetch(`http://${IP_BACKEND}:8000/usuarios/registro`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -123,7 +124,7 @@ async function cargarQuejasWeb() {
   if (!token) return;
 
   try {
-    const res = await fetch("http://localhost:8003/api/reporte/web", {
+    const res = await fetch(`http://${IP_BACKEND}:8003/api/reporte/web`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
@@ -160,7 +161,7 @@ async function cargarQuejasOficina() {
   if (!token) return;
   const decoded = parseJwt(token);
     try{
-     const res = await fetch("http://localhost:8003/api/reporte/oficina",{
+     const res = await fetch(`http://${IP_BACKEND}:8003/api/reporte/oficina`,{
        headers: {
          "Authorization": `Bearer ${token}`
      }
@@ -198,7 +199,7 @@ async function cargarQuejasOficina() {
 
 async function cargarUsuarios() {
   try {
-    const res = await fetch("http://localhost:8000/usuarios/usuarios");
+    const res = await fetch(`http://${IP_BACKEND}:8000/usuarios/usuarios`);
     if (!res.ok) throw new Error("Error al cargar los usuarios");
     const usuarios = await res.json();
 

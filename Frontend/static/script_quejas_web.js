@@ -1,3 +1,5 @@
+const IP_BACKEND = window.location.hostname;
+
 // Decodificar JWT 
 function parseJwt(token) {
   const base64Url = token.split('.')[1];
@@ -52,7 +54,7 @@ async function enviarQueja() {
 
   try {
     //envia la queja al backend
-    const response = await fetch("http://localhost:8001/quejas/", {
+    const response = await fetch(`http://${IP_BACKEND}:8001/quejas/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +87,7 @@ async function cargarQuejas() {
 
   try {
     //Hace una solicitud al backend para obtener las quejas del usuario
-    const response = await fetch(`http://localhost:8003/api/reporte/web/usuario/${id_usuario}`, {
+    const response = await fetch(`http://${IP_BACKEND}:8003/api/reporte/web/usuario/${id_usuario}`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }

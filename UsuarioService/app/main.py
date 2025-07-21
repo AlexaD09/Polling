@@ -12,16 +12,10 @@ app = FastAPI(title="Usuario Service")
 #app.mount("/static", StaticFiles(directory=str(frontend_path)), name="static")
 
 # CORS
-origins = [
-    "http://frontend:80",
-    "http://localhost:8081",
-    "http://localhost:8080",
-    # Puedes agregar más orígenes si tienes otros frontends o ambientes
-]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # Tu frontend local
+    allow_origins=["*"],  # Tu frontend local
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

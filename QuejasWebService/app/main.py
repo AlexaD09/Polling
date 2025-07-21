@@ -8,16 +8,9 @@ app = FastAPI()
 # Configuración CORS para permitir peticiones desde tu frontend (localhost:8080)
 
 
-origins = [
-    "http://frontend:80",  # Tu frontend
-    "http://127.0.0.1:8080",
-    "http://localhost:8081",
-    "http://localhost:8080",  # Por si el navegador lo toma así
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,      # ✅ Importante: especificar bien los orígenes
+    allow_origins=["*"],     # ✅ Importante: especificar bien los orígenes
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -22,8 +22,11 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
   const correo = document.getElementById("correo").value;
   const pssw = document.getElementById("contraseña").value;
 
+  const IP_BACKEND = window.location.hostname;  // toma la IP automáticamente
+
+
    // Hace una solicitud POST al endpoint del backend para iniciar sesión
-  const res = await fetch("http://localhost:8000/usuarios/login", {
+  const res = await fetch(`http://${IP_BACKEND}:8000/usuarios/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ correo, pssw })

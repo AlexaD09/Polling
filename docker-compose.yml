@@ -60,7 +60,7 @@ services:
     build: ./Frontend
     container_name: frontend
     ports:
-      - "8080:80"
+      - "7000:80"
     networks:
       - polling_net
 
@@ -96,11 +96,12 @@ services:
       sh -c "
         mongod --bind_ip_all --replSet rs0 & 
         sleep 10 &&
-        mongosh --eval 'rs.initiate()' &&
+        mongosh --eval 'try { rs.initiate() } catch(e) { print(\"Replica set ya iniciado: \" + e.message) }' &&
         sleep 10 &&
         mongorestore --db quejas_db --drop /dump/quejas_db &&
         tail -f /dev/null
       "
+
 
 
 
